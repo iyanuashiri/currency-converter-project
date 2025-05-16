@@ -1,0 +1,2 @@
+class FrankfurterException(Exception):
+    pass
