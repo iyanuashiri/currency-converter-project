@@ -36,12 +36,12 @@ The API has a subscription credit system. Each user starts with 10 credits. Each
 
 ## Usage
 
-1. Create a user with a username and password endpoint `/users/`
-2. Get currencies endpoint `/currencies/`
-3. Get currency rates endpoint `/conversions/`. The base currency should be in the format `USD` and the target currency should be in the format `EUR`.
-4. Get historical currency rates endpoint `/historical-rates/{date}`
-5. Get historical currency rates endpoint with base currency and target currency `/historical-rates/{date}?base_currency={base_currency}&target_currency={target_currency}`. If no base currency or target currency is provided, the default is USD to EUR. The date should be in the format `YYYY-MM-DD`.
-6. Get all users endpoint `/users/`
+1. Create a user with a username and password endpoint `/users/`. The username should be unique. The endpoint returns the user object with the API key.
+2. Get currencies endpoint `/currencies/`. The endpoint returns the currencies object with the currencies. If the user has insufficient credits, the API will return a 403 status code. It requires an API key.
+3. Get currency rates endpoint `/conversions/`. The base currency should be in the format `USD` and the target currency should be in the format `EUR`. If the user has insufficient credits, the API will return a 403 status code. It requires an API key.
+4. Get historical currency rates endpoint `/historical-rates/{date}`. The date should be in the format `YYYY-MM-DD`. If the user has insufficient credits, the API will return a 403 status code. It requires an API key.
+5. Get historical currency rates endpoint with base currency and target currency `/historical-rates/{date}?base_currency={base_currency}&target_currency={target_currency}`. If no base currency or target currency is provided, the default is USD to EUR. The date should be in the format `YYYY-MM-DD`. If the user has insufficient credits, the API will return a 403 status code. It requires an API key.
+6. Get all users endpoint `/users/`. It returns all users. It does not require an API key.
 
 
 ## Example Requests
@@ -65,6 +65,7 @@ GET http://localhost:8000/conversions/
 {
     "base_currency": "USD",
     "target_currency": "EUR"
+    "amount": 100
 }
 
 
